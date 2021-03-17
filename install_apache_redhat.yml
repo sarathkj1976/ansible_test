@@ -1,0 +1,26 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Install Apache Webserver
+    yum:
+      name: httpd
+  - name: Enable Firewall Rules for  Apache Webserver
+    firewalld:
+      service: http
+      zone: public
+      permanent: yes
+      immediate: yes
+      state: enabled
+      name: httpd
+  - name: Start Apache Webserver
+    service:
+      name: httpd
+      state: started
+  handlers:
+  - name: Restart Apache Webserver
+    service: 
+      name: httpd
+      state: started

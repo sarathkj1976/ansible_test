@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Stop Apache Webserver
+    service:
+      name: httpd
+      state: stopped
+  - name: Remove Apache Webserver
+    yum:
+      name: httpd
+      state: absent
